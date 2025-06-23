@@ -19,7 +19,7 @@ go run main.go
 # Или с сборкой
 go build -o task-service && ./task-service
 Логи доступны:
-
+```
 В консоли
 
 В файле task_service.log
@@ -30,36 +30,31 @@ Endpoint:
 POST /tasks/create
 
 Request:
-
-http
 POST /tasks/create HTTP/1.1
 Host: localhost:8080
-Response:
 
-json
+Response:
 HTTP/1.1 201 Created
 Content-Type: application/json
-
+```json
 {
   "id": "task_123456789",
   "status": "pending",
   "created_at": "2023-06-20T14:30:00Z"
 }
+```
 2. Получение статуса задачи
 Endpoint:
 GET /tasks/get?id=<task_id>
 
 Request:
-
-http
 GET /tasks/get?id=task_123456789 HTTP/1.1
 Host: localhost:8080
-Response (в процессе):
 
-json
+Response (в процессе):
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```json
 {
   "id": "task_123456789",
   "status": "processing",
@@ -67,9 +62,10 @@ Content-Type: application/json
   "started_at": "2023-06-20T14:30:01Z",
   "duration": 150000000000
 }
+```
 Response (завершено):
 
-json
+```json
 {
   "id": "task_123456789",
   "status": "completed",
@@ -79,19 +75,20 @@ json
   "duration": 225000000000,
   "result": "Результат обработки задачи task_123456789"
 }
+```
 3. Удаление задачи
 Endpoint:
 DELETE /tasks/delete?id=<task_id>
 
 Request:
 
-http
+```http
 DELETE /tasks/delete?id=task_123456789 HTTP/1.1
 Host: localhost:8080
 Response:
 
-http
 HTTP/1.1 204 No Content
+```
 🛠 Примеры использования
 cURL
 bash
@@ -103,8 +100,7 @@ curl "http://localhost:8080/tasks/get?id=task_123456789"
 
 # Удаление задачи
 curl -X DELETE "http://localhost:8080/tasks/delete?id=task_123456789"
-HTTPie
-bash
+
 # Создание задачи
 http POST :8080/tasks/create
 
@@ -113,11 +109,12 @@ http GET :8080/tasks/get id==task_123456789
 
 # Удаление задачи
 http DELETE :8080/tasks/delete id==task_123456789
-🧪 Тестирование
+Тестирование
 Запуск тестов:
 
-bash
+```bash
 go test -v ./...
+```
 Тесты покрывают:
 
 Создание задач
@@ -133,17 +130,16 @@ go test -v ./...
 📊 Логирование
 Уровни логирования (настраиваются при запуске):
 
-text
 error    - Только критические ошибки
 info     - Основные операции (+error)
 debug    - Детальная отладка (+info+error)
 debug-raw- Максимальная детализация
 Пример лога:
 
-text
 2023/06/20 14:30:00 [INFO] Created task: task_123456789
 2023/06/20 14:30:01 [DEBUG] Processing started: task_123456789
 2023/06/20 14:33:45 [INFO] Task completed: task_123456789 (duration: 3m45s)
+
 🔮 Roadmap
 Добавить graceful shutdown
 
