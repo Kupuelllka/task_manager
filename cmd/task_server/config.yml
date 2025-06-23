@@ -1,0 +1,7 @@
+general:
+  host: "127.0.0.1"
+  port: 8080
+logger:
+  target: "all"                                    # stdout или file
+  level: "debug"                                   # Уровень логирования
+  file: "task_service.log"                         # Файл лога (если target=file)
